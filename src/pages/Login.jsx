@@ -1,13 +1,21 @@
 import React,{useState} from 'react'
-import { useNavigate } from 'react-router-dom';
+// importing useNavigate for dynamic routing from react-router-dom
+import { useNavigate,useLocation } from 'react-router-dom';
 export default function Login() {
     const [user,setUser]=useState('');
     const [password,setPassword]=useState('');
+    // using useLocation for url access
+    const location= useLocation();
+    // finding data of query params 
+    const queryData= new URLSearchParams(location.search)
+    // by using get method printing data on the console of age 
+    console.log(queryData.get('age'))
     const navigate=useNavigate();
     function handleSubmit(e){
         e.preventDefault();
         localStorage.setItem('username',user);
         localStorage.setItem('password',password);
+        // when data will submit in localstorage then it will move to home page by using dynamic routing( by using useNavigate)
        navigate('/')
     }
     function handleChange(e){
